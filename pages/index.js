@@ -1,7 +1,6 @@
-//import { useEffect, useState } from "react";
 import { MongoClient } from "mongodb";
 import Head from "next/head";
-import { Fragment } from "react";
+import {Fragment}  from 'react';
 import MeetupList from "../components/meetups/MeetupList";
 
 /*const Dummy_Meetups = [
@@ -45,7 +44,6 @@ function HomePage(props) {
           content="A great tool to setup your Meetups with your friends"
         />
       </Head>
-
       <MeetupList meetups={props.meetups} />
     </Fragment>
   );
