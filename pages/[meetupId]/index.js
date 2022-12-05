@@ -26,12 +26,12 @@ export async function getStaticPaths() {
   );
   const db = client.db();
   const meetupCollection = db.collection("meetups");
-  const meetups = await meetupCollection.find({}, { _id : 1 }).toArray();
+  const meetups = await meetupCollection.find({}, { _id: 1 }).toArray();
   client.close();
   // first bracket means fetcjing all the object no filter criteria
   // second parameter means which should be extracted only include the id not other value
   return {
-    fallback: false,
+    fallback: 'blocking',
     paths: meetups.map((meetup) => ({
       params: { meetupId: meetup._id.toString() },
       // object with object
@@ -69,9 +69,11 @@ export async function getStaticProps(context) {
   );
   const db = client.db();
   const meetupCollection = db.collection("meetups");
-  const selectedMeetup = await meetupCollection.findOne({ _id: ObjectId(meetupId) });
+  const selectedMeetup = await meetupCollection.findOne({
+    _id: ObjectId(meetupId),
+  });
   client.close();
-  
+
   return {
     props: {
       meetupData: {
